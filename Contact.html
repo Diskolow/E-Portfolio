@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>E-portfolio Anthony El Dahdah</title> 
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+  <a class="navbar-brand" href="#">Contact</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="index.html">Home</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#"></a>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+          Menu
+        </a>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="compétences.html">Compétences</a> 
+            <a class="dropdown-item" href="Experiences.html">Experiences</a> 
+            <a class="dropdown-item" href="Loisirs.html">Loisirs</a> 
+          <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="Contact.html">Contact</a>
+        </div>
+      </li>
+    </ul>
+    <a class="btn btn-primary ml-2"
+       href="C:/dev_web/E-portfolio_Anthony_EL_DAHDAH_BUT_2_SD_FI_EMS/CV_Anthony_EL_DAHDAH.pdf"
+       download>
+       Télécharger le CV
+    </a>
+    <!-- BARRE DE RECHERCHE -->
+    <form class="form-inline my-2 my-lg-0" onsubmit="searchText(event)">
+      <input id="searchInput" class="form-control mr-sm-2" type="search" placeholder="Rechercher une compétence">
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
+<!--JavaScript-->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<script>
+function clearHighlights() {
+    const marks = document.querySelectorAll("mark");
+    marks.forEach(mark => {
+        const parent = mark.parentNode;
+        parent.replaceChild(document.createTextNode(mark.textContent), mark);
+        parent.normalize();
+    });
+}
+
+function searchText(event) {
+    event.preventDefault();
+    clearHighlights();
+
+    const query = document.getElementById("searchInput").value.trim();
+    if (!query) return;
+
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+    let node;
+    let found = false;
+
+    while (node = walker.nextNode()) {
+        const text = node.nodeValue;
+        const index = text.toLowerCase().indexOf(query.toLowerCase());
+
+        if (index !== -1) {
+            const before = document.createTextNode(text.slice(0, index));
+            const match = document.createElement("mark");
+            match.textContent = text.slice(index, index + query.length);
+            const after = document.createTextNode(text.slice(index + query.length));
+
+            const parent = node.parentNode;
+            parent.replaceChild(after, node);
+            parent.insertBefore(match, after);
+            parent.insertBefore(before, match);
+
+            match.scrollIntoView({ behavior: "smooth", block: "center" });
+            found = true;
+            break;
+        }
+    }
+    if (!found) {
+        alert("Mot non trouvé");
+    }
+}
+</script>
+<!--CONTENU-->
+<br><br><br>
+<h1><center>N'hésitez pas à me contacter :</center></h1>
+<br><br><br>        
+<form action="mailto:eldahdahanthony@gmail.com" method="post" enctype="text/plain">
+
+  <div class="form-group">
+    <label>Nom</label>
+    <input type="text" name="nom" class="form-control" required>
+  </div>
+
+  <div class="form-group">
+    <label>Email</label>
+    <input type="email" name="email" class="form-control" required>
+  </div>
+
+  <div class="form-group">
+    <label>Message</label>
+    <textarea name="message" class="form-control" required></textarea>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Envoyer</button>
+
+</form>
+
+    </body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>E-portfolio Anthony El Dahdah</title> 
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+  <a class="navbar-brand" href="#">Compétences</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="index.html">Home</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#"></a>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+          Menu
+        </a>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="compétences.html">Compétences</a> 
+            <a class="dropdown-item" href="Experiences.html">Experiences</a> 
+            <a class="dropdown-item" href="Loisirs.html">Loisirs</a> 
+          <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="Contact.html">Contact</a>
+        </div>
+      </li>
+    </ul>
+    <a class="btn btn-primary ml-2"
+       href="C:/dev_web/E-portfolio_Anthony_EL_DAHDAH_BUT_2_SD_FI_EMS/CV_Anthony_EL_DAHDAH.pdf"
+       download>
+       Télécharger le CV
+    </a>
+    <!-- BARRE DE RECHERCHE -->
+    <form class="form-inline my-2 my-lg-0" onsubmit="searchText(event)">
+      <input id="searchInput" class="form-control mr-sm-2" type="search" placeholder="Rechercher une compétence">
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
+<!--JavaScript-->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<script>
+function clearHighlights() {
+    const marks = document.querySelectorAll("mark");
+    marks.forEach(mark => {
+        const parent = mark.parentNode;
+        parent.replaceChild(document.createTextNode(mark.textContent), mark);
+        parent.normalize();
+    });
+}
+
+function searchText(event) {
+    event.preventDefault();
+    clearHighlights();
+
+    const query = document.getElementById("searchInput").value.trim();
+    if (!query) return;
+
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+    let node;
+    let found = false;
+
+    while (node = walker.nextNode()) {
+        const text = node.nodeValue;
+        const index = text.toLowerCase().indexOf(query.toLowerCase());
+
+        if (index !== -1) {
+            const before = document.createTextNode(text.slice(0, index));
+            const match = document.createElement("mark");
+            match.textContent = text.slice(index, index + query.length);
+            const after = document.createTextNode(text.slice(index + query.length));
+
+            const parent = node.parentNode;
+            parent.replaceChild(after, node);
+            parent.insertBefore(match, after);
+            parent.insertBefore(before, match);
+
+            match.scrollIntoView({ behavior: "smooth", block: "center" });
+            found = true;
+            break;
+        }
+    }
+    if (!found) {
+        alert("Mot non trouvé");
+    }
+}
+</script>
+<!--CONTENU-->
+<br><br><br>
+<h1><center>Mes compétences</center></h1>
+<section class="banniere-skills"> <img src="image/banniere-skills.jpg" alt="Compétences">       
+<section class="competences">
+
+
+    <div class="competence-card">
+        <h3>Savoir-être</h3>
+
+        <ul>
+            <li><b>Sens du relationnel</b></li>
+            <li><b>Esprit d’équipe</b></li>
+            <li><b>Rigueur</b></li>
+            <li><b>Esprit d’analyse</b></li>
+        </ul>
+    </div>
+
+
+    <div class="competence-card">
+        <h3>Compétences académiques</h3>
+
+        <p><b>Analyse Statistique & Modélisation :</b><br>
+        Analyse statistique, modèles linéaires, tests, analyses prédictives, sondages</p>
+
+        <p><b>Programmation & Traitement des Données :</b><br>
+        Programmation statistique, automatisation, nettoyage, workflows, qualité</p>
+
+        <p><b>Base de Données & Gestion des Données :</b><br>
+        Requêtage, base de données, datawarehouse, pipelines</p>
+
+        <p><b>Visualisation, Reporting & Gouvernance :</b><br>
+        Dataviz, dashboards, reporting, rédaction, RGPD</p>
+    </div>
+
+
+    <div class="competence-card">
+        <h3>Compétences en Informatique</h3>
+
+        <p><b>Outils & Logiciels :</b><br>
+        Power BI, Excel, Power Query, R(ggplot2, Shiny, Tidyverse)</p>
+
+        <p><b>Programmation & Data Science :</b><br>
+        Python(Numpy, Pandas, MatplotLib, Seaborn, Scipi & Scikit Learn) R, SAS, SQL, HTML, CSS</p>
+    </div>
+
+
+</section>
+
+    </body>
+</html>

@@ -95,9 +95,26 @@ text-decoration:underline;
 
 footer{
 text-align:center;
-padding:30px 10px;
-font-size:0.9em;
+padding: 30px 10px;
+font-size: 0.9em;
 color:#666;
+}
+
+.container{
+  min-height:calc(100vh - 160px);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+
+.grid{
+  justify-content:center;
+}
+
+.grid .card{
+  max-width:350px;
+  width:100%;
 }
 
 /*Compétences*/
@@ -222,5 +239,6 @@ color:#666;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
 
 

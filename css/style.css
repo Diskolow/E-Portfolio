@@ -2,9 +2,8 @@
 /*Profil*/
 
 body{
-max-width:1000px;
-margin:40px auto;
-padding:0 20px;
+margin:0;
+padding:0;
 }
 
 
@@ -102,11 +101,14 @@ color:#666;
 }
 
 .container{
-  min-height:calc(100vh - 160px);
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
+max-width:1000px;
+margin:auto;
+padding:40px 20px;
+min-height:calc(100vh - 160px);
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
 }
 
 .grid{
@@ -236,6 +238,7 @@ color:#666;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
 
 
 
